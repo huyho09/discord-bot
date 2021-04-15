@@ -33,5 +33,7 @@ async def on_message(message):
         return
     if 'hello' in message.content.lower():
         await message.channel.send('Hello World')
+    elif message.content == 'raise-exception':
+        raise discord.DiscordException
 
 client.run(TOKEN)
