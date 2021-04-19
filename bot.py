@@ -2,12 +2,18 @@ import os
 
 import discord
 from dotenv import load_dotenv
+import json
+
+
+f = open("data.json", "r")
+y = json.load(f)
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
 client = discord.Client()
+guild = discord.Guild
 
 
 @client.event
@@ -26,13 +32,19 @@ async def on_member_join(member):
         f'Hi {member.name}, welcome to my Discord server!'
     )
 
+# print(str(list(y.keys())[0]))
+# print(type(str(y.keys())))
+# print(y.values())
+
+word = str(list(y.keys())[0])
+response = str(list(y.values())[0])
 
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
-    if 'hello' in message.content.lower():
-        await message.channel.send('Hello World')
+    if message.content.lower() == word.lower():
+        await message.channel.send(response)
     elif message.content == 'raise-exception':
         raise discord.DiscordException
 
