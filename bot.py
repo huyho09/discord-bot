@@ -36,16 +36,15 @@ async def on_member_join(member):
 # print(type(str(y.keys())))
 # print(y.values())
 
-word = str(list(y.keys())[0])
-response = str(list(y.values())[0])
 
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
-    if message.content.lower() == word.lower():
-        await message.channel.send(response)
-    elif message.content == 'raise-exception':
-        raise discord.DiscordException
+    for i, j in y.items():
+        if message.content.lower() == i.lower():
+            await message.channel.send(j)
+        elif message.content == 'raise-exception':
+            raise discord.DiscordException
 
 client.run(TOKEN)

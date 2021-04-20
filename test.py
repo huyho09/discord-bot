@@ -34,4 +34,5 @@ if "data.json":
     with open("data.json", "w") as f:
         json.dump(y, f)
 
+
 f.close()
